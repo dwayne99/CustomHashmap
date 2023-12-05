@@ -8,6 +8,12 @@ public:
     Node<K, V>* next;
 
     Node(K key, V value);
+    Node(Node<K, V>& other_node); // copy constructor
+    Node<K, V>& operator=(Node<K, V>& other_node); // copy assignment
+    Node(Node<K, V>&& other_node);
+    Node<K, V>& operator=(Node<K, V>&& other_node);
+    void print() const;
+    ~Node();
 };
 
 
@@ -21,7 +27,9 @@ public:
 
     // constructors
     LinkedList();
-    LinkedList(Node<K, V> node);
+    LinkedList(Node<K, V>* node);
+
+    //copy constructor
 
     // get the head node of the linked list
     const Node<K, V>* getHead() const;
@@ -38,6 +46,9 @@ public:
 
     // view the linkedlist
     void print() const;
+
+    //destructor
+    ~LinkedList();
 
 };
 
