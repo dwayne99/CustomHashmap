@@ -7,7 +7,7 @@ Node<K, V>::Node(K key, V value) : key{key}, value{value}, next{nullptr} {}
  * Node: Copy constructor
 */
 template<typename K, typename V>
-Node<K, V>::Node(Node<K, V>& other_node) : key{other_node.key}, value{other_node.value}, next{nullptr} {}
+Node<K, V>::Node(Node<K, V>& other_node) : key{other_node.key}, value{other_node.value}, next{other_node.next} {}
 
 /**
  * Node: Copy assignment operator
@@ -20,7 +20,7 @@ Node<K,V>& Node<K, V>::operator=(Node<K, V>& other_node)
     {
         this->key = other_node.key;
         this->value = other_node.value;
-        this->next = nullptr;
+        this->next = other_node.next;
         return *this;
     }
 }
@@ -64,6 +64,72 @@ Node<K, V>::~Node()
 
 template<typename K, typename V>
 LinkedList<K, V>::LinkedList() : head{nullptr}, tail{nullptr} {}
+
+/**
+ * LinkedList: Copy constructor
+*/
+template<typename K, typename V>
+LinkedList<K, V>::LinkedList(LinkedList<K, V>& other_ll) 
+{
+    if (other_ll.head) // at least one node in the list
+    {
+        Node<K, V>* ptr = new Node<K, V>{*(other_ll.head)};
+        head = ptr;
+        tail = ptr;
+        ptr = ptr->next;
+        while(ptr)
+        {
+            Node<K, V>* node = new Node<K, V>{*ptr};
+            tail->next = node;
+            tail = node;
+            ptr = ptr->next;
+        }
+
+    }
+    else 
+    {
+        head = nullptr;
+        tail = nullptr;
+    }
+}
+
+/**
+ * LinkedList: Copy constructor
+*/
+template<typename K, typename V>
+LinkedList<K, V>& LinkedList<K, V>::operator=(LinkedList<K, V>& other_ll) 
+{
+    if (this != &other_ll)
+    {
+        delete head;
+        head = nullptr;
+        tail = nullptr;
+        if (other_ll.head) // at least one node in the list
+        {
+            Node<K, V>* ptr = new Node<K, V>{*(other_ll.head)};
+            head = ptr;
+            tail = ptr;
+            ptr = ptr->next;
+            while(ptr)
+            {
+                Node<K, V>* node = new Node<K, V>{*ptr};
+                tail->next = node;
+                tail = node;
+                ptr = ptr->next;
+            }
+
+        }
+        else 
+        {
+            head = nullptr;
+            tail = nullptr;
+        }
+        return *this;
+    }
+    else { return *this;}
+}
+
+
 
 template<typename K, typename V>
 LinkedList<K, V>::LinkedList(Node<K, V>* node) : head{node}, tail{node} {}

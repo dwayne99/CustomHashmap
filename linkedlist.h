@@ -20,16 +20,19 @@ public:
 template<typename K, typename V>
 class LinkedList
 {
-    Node<K, V>* head;
-    Node<K, V>* tail;
 
 public:
+    Node<K, V>* head;
+    Node<K, V>* tail;
 
     // constructors
     LinkedList();
     LinkedList(Node<K, V>* node);
 
-    //copy constructor
+    //copy constructor and copy assignment
+    LinkedList(LinkedList<K, V>& other_ll);
+    LinkedList<K, V>& operator=(LinkedList<K, V>& other_ll);
+
 
     // get the head node of the linked list
     const Node<K, V>* getHead() const;
