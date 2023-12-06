@@ -19,13 +19,14 @@ int main()
     ll2.push_back(new Node<int, int>(2,20));
     ll2.push_back(new Node<int, int>(2,200));
 
-    ll2 = ll;
-    ll.tail->key = 1001;
-    ll2.tail->key = 1000;
+    LinkedList<int, int> ll3{new Node<int, int>(2,3)};
+    ll3 = std::move(ll2);
     
     ll.print();
     std::cout << "-----\n";
     ll2.print();
+    std::cout << "-----\n";
+    ll3.print();
 
 
     return 0;

@@ -33,6 +33,9 @@ public:
     LinkedList(LinkedList<K, V>& other_ll);
     LinkedList<K, V>& operator=(LinkedList<K, V>& other_ll);
 
+    // move constructor and move assignment
+    LinkedList(LinkedList<K, V>&& other_ll);
+    LinkedList<K, V>& operator=(LinkedList<K, V>&& other_ll);
 
     // get the head node of the linked list
     const Node<K, V>* getHead() const;

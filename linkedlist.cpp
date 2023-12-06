@@ -1,4 +1,5 @@
 #include "linkedlist.h"
+#include <utility>
 
 template<typename K, typename V>
 Node<K, V>::Node(K key, V value) : key{key}, value{value}, next{nullptr} {}
@@ -51,7 +52,6 @@ Node<K, V>& Node<K, V>::operator=(Node<K, V>&& other_node)
     }
 }
 
-
 /**
  * Node: Destructor
 */
@@ -94,7 +94,7 @@ LinkedList<K, V>::LinkedList(LinkedList<K, V>& other_ll)
 }
 
 /**
- * LinkedList: Copy constructor
+ * LinkedList: Copy assignment
 */
 template<typename K, typename V>
 LinkedList<K, V>& LinkedList<K, V>::operator=(LinkedList<K, V>& other_ll) 
@@ -129,6 +129,33 @@ LinkedList<K, V>& LinkedList<K, V>::operator=(LinkedList<K, V>& other_ll)
     else { return *this;}
 }
 
+/**
+* LinkedList: Move constructor
+*/
+template<typename K, typename V>
+LinkedList<K, V>::LinkedList(LinkedList<K, V>&& other_ll) 
+: head{std::exchange(other_ll.head, nullptr)}, 
+tail{std::exchange(other_ll.tail, nullptr)} 
+{
+}
+
+/**
+* LinkedList: Move assingment
+*/
+template<typename K, typename V>
+LinkedList<K, V>& LinkedList<K, V>::operator=(LinkedList<K, V>&& other_ll) 
+{
+    delete head;
+    head = nullptr;
+    tail = nullptr;
+    if (this != &other_ll)
+    {
+        this->head = std::exchange(other_ll.head, nullptr);
+        this->tail = std::exchange(other_ll.tail, nullptr);
+        return *this;
+    }
+    else { return *this; }
+}
 
 
 template<typename K, typename V>
