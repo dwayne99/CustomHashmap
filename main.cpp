@@ -1,32 +1,45 @@
 #include <iostream>
 
-// #include "hashmap.h"
+#include "hashmap.cpp"
 
-#include "linkedlist.cpp"
 
 
 int main() 
 {
 
-    LinkedList<int, int> ll(new Node<int,int>(0,0));
-    ll.push_back(new Node<int, int>(1,2));
-    ll.push_back(new Node<int, int>(10,20));
-    ll.push_back(new Node<int, int>(100,200));
-    // ll.print();
 
-    LinkedList<int, int> ll2(new Node<int,int>(2,0));
-    ll2.push_back(new Node<int, int>(2,2));
-    ll2.push_back(new Node<int, int>(2,20));
-    ll2.push_back(new Node<int, int>(2,200));
+    Hashmap<std::string, float> hm; 
 
-    LinkedList<int, int> ll3{new Node<int, int>(2,3)};
-    ll3 = std::move(ll2);
+    std::cout << hm.at("dwayne") << std::endl;
+    hm.insert("dwayne", 102.3);
+    hm.insert("abis", 102.3);
+    hm.print();
+
+    std::cout << hm.at("dwayne") << std::endl;
+    std::cout << hm.at("as") << std::endl;
+
+
+
+
+    // LinkedList<int, float> ll(new Node<int,float>(0,0.23));
+    // ll.push_back(new Node<int, float>(1,2.23));
+    // ll.push_back(new Node<int, float>(10,20));
+    // ll.push_back(new Node<int, float>(100,20.4));
+    // // ll.print();
+
+    // LinkedList<int, float> ll2(new Node<int,float>(2,0.3));
+    // ll2.push_back(new Node<int, float>(2,2));
+    // ll2.push_back(new Node<int, float>(2,20.34));
+    // ll2.push_back(new Node<int, float>(2,200.3));
+
+    // LinkedList<int, float> ll3{new Node<int, float>(2,3.34)};
+    // ll3 = std::move(ll2);
     
-    ll.print();
-    std::cout << "-----\n";
-    ll2.print();
-    std::cout << "-----\n";
-    ll3.print();
+    // ll.print();
+    // std::cout << "-----\n";
+    // ll2.print();
+    // std::cout << "-----\n";
+    // ll3.print();
 
 
     return 0;

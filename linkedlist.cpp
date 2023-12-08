@@ -1,6 +1,9 @@
 #include "linkedlist.h"
 #include <utility>
 
+/**
+ * Node: Constructor
+*/
 template<typename K, typename V>
 Node<K, V>::Node(K key, V value) : key{key}, value{value}, next{nullptr} {}
 
@@ -62,8 +65,17 @@ Node<K, V>::~Node()
     // std::cout << "Node destroyed!\n";
 }
 
+/**
+ * LinkedList: Default constructor
+*/
 template<typename K, typename V>
 LinkedList<K, V>::LinkedList() : head{nullptr}, tail{nullptr} {}
+
+/**
+ * LinkedList: one element constructor
+*/
+template<typename K, typename V>
+LinkedList<K, V>::LinkedList(Node<K, V>* node) : head{node}, tail{node} {}
 
 /**
  * LinkedList: Copy constructor
@@ -157,28 +169,66 @@ LinkedList<K, V>& LinkedList<K, V>::operator=(LinkedList<K, V>&& other_ll)
     else { return *this; }
 }
 
-
+/**
+* LinkedList: Check if a node with Key exists
+*
+* @param Key to check for among all the nodes
+* @return true if Key exists else false
+*/
 template<typename K, typename V>
-LinkedList<K, V>::LinkedList(Node<K, V>* node) : head{node}, tail{node} {}
+bool LinkedList<K, V>::contains(K key) 
+{
+    Node<K, V>* ptr = head;
 
+    while (ptr)
+    {
+        if (ptr->key == key) { return true; }
+        ptr = ptr->next;
+    }
+
+    return false;
+}
+
+
+/**
+ * Returns a const pointer to the head/start of the linked list
+ * 
+ * @return head : const pointer to the start of the list
+*/
 template<typename K, typename V>
 const Node<K, V>* LinkedList<K, V>::getHead() const
 {
     return head;
 }
 
-template<typename K, typename V>
-const Node<K, V>* LinkedList<K, V>::getTail() const
-{
-    return tail;
-}
-
+/**
+ * Returns a pointer to the head/start of the linked list
+ * 
+ * @return head : pointer to the start of the list
+*/
 template<typename K, typename V>
 Node<K, V>* LinkedList<K, V>::getHead() 
 {
     return head;
 }
 
+/**
+ * Returns a pointer to the tail/end of the list
+ * 
+ * @return head : pointer to the end of the list
+*/
+template<typename K, typename V>
+const Node<K, V>* LinkedList<K, V>::getTail() const
+{
+    return tail;
+}
+
+
+/**
+ * Inserts a node to the back of the linked list
+ * 
+ * @param node : the node to be inserted
+*/
 template<typename K, typename V>
 void LinkedList<K, V>::push_back(Node<K, V>* node)
 {
@@ -196,6 +246,11 @@ void LinkedList<K, V>::push_back(Node<K, V>* node)
 
 }
 
+/**
+ * Deletes a node from the linked list with a particular key
+ * 
+ * @param key of the node to delete 
+*/
 template <typename K, typename V>
 void LinkedList<K, V>::erase(K key) 
 {
@@ -232,12 +287,19 @@ void LinkedList<K, V>::erase(K key)
         }
     }
 }
+
+/**
+ * Prints the contents (key, value) of a node
+*/
 template<typename K, typename V>
 void Node<K, V>::print() const
 {
     std::cout << "(" << this->key << ", " << this->value << ")\n";
 }
 
+/**
+ * Prints the linked list
+*/
 template<typename K, typename V>
 void LinkedList<K, V>::print() const
 {
@@ -250,6 +312,45 @@ void LinkedList<K, V>::print() const
     }
 }
 
+/**
+ * returns the value of the key within the linked list
+*/
+template<typename K, typename V>
+V LinkedList<K, V>::getValue(K key) const
+{
+    Node<K, V>* ptr = head;
+
+    while (ptr)
+    {
+        if (ptr->key == key) { return ptr->value; } 
+        ptr = ptr->next;
+    }
+
+    return -1;
+}
+
+
+/**
+ * returns the size of the linked list
+*/
+template<typename K, typename V>
+size_t LinkedList<K, V>::size() const
+{
+    Node<K, V>* ptr = head;
+    size_t count = 0;
+
+    while (ptr)
+    {
+        count++;
+        ptr = ptr->next;
+    }
+
+    return count;
+}
+
+/**
+ * Destructor: frees all the resources allocated by the linkedlist
+*/
 template <typename K, typename V>
 LinkedList<K, V>::~LinkedList()
 {
@@ -258,6 +359,6 @@ LinkedList<K, V>::~LinkedList()
     head = nullptr;
     tail = nullptr;
         
-    std::cout << "LinkedList destroyed!\n";
+    // std::cout << "LinkedList destroyed!\n";
 }
 

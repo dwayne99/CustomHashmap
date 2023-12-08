@@ -10,10 +10,10 @@ public:
     Node(K key, V value);
     Node(Node<K, V>& other_node); // copy constructor
     Node<K, V>& operator=(Node<K, V>& other_node); // copy assignment
-    Node(Node<K, V>&& other_node);
-    Node<K, V>& operator=(Node<K, V>&& other_node);
-    void print() const;
-    ~Node();
+    Node(Node<K, V>&& other_node); // move constructor
+    Node<K, V>& operator=(Node<K, V>&& other_node); // move assignment
+    void print() const; // prints the contents of the node
+    ~Node(); // destructor
 };
 
 
@@ -37,9 +37,16 @@ public:
     LinkedList(LinkedList<K, V>&& other_ll);
     LinkedList<K, V>& operator=(LinkedList<K, V>&& other_ll);
 
+    // check if node exists in linkedlist
+    bool contains(K key);
+
+    // gets the size of the linked list
+    size_t size() const;
+
     // get the head node of the linked list
     const Node<K, V>* getHead() const;
     Node<K, V>* getHead();
+    V getValue(K key) const;
 
     // get the tail node of the linked list
     const Node<K, V>* getTail() const;
