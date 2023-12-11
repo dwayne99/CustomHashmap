@@ -29,6 +29,17 @@ Node<K,V>& Node<K, V>::operator=(Node<K, V>& other_node)
     }
 }
 
+template<typename K, typename V>
+Node<K,V>& Node<K, V>::operator=(V value)
+{
+    if (this->value == value) {return *this;}
+    else
+    {
+        this->value = value;
+        return *this;
+    }
+}
+
 /**
  * Node: Move constructor
 */
@@ -265,6 +276,7 @@ void LinkedList<K, V>::erase(K key)
     {
         Node<K, V>* ptr = head;
         head = head->next;
+        ptr->next = nullptr;
         delete ptr;
     }
     else
@@ -279,6 +291,7 @@ void LinkedList<K, V>::erase(K key)
         }
 
         p1->next = p2->next;
+        p2->next = nullptr;
         delete p2;
 
         if (p1->next == nullptr)

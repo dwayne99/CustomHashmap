@@ -24,7 +24,8 @@ public:
 
     // for lookup
     V at(K key) const; 
-    V operator[](size_t index);
+    // void operator[](K key); 
+    V operator[](K key) const;
     bool contains(K key) const; // checks if element with key exists in the hashmap, if so return True
 
     // print

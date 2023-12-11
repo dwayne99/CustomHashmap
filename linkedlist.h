@@ -10,6 +10,7 @@ public:
     Node(K key, V value);
     Node(Node<K, V>& other_node); // copy constructor
     Node<K, V>& operator=(Node<K, V>& other_node); // copy assignment
+    Node<K, V>& operator=(V value); // copy assignment
     Node(Node<K, V>&& other_node); // move constructor
     Node<K, V>& operator=(Node<K, V>&& other_node); // move assignment
     void print() const; // prints the contents of the node

@@ -155,6 +155,42 @@ bool Hashmap<K, V, Hash, KeyEqual>::contains(K key) const
     return false;
 }
 
+/** * returns the value of the key
+ * 
+ * @param key that your searching for
+ * 
+ * @return value of the key
+*/
+template<
+    typename K,
+    typename V,
+    typename Hash,
+    typename KeyEqual
+>
+V Hashmap<K, V, Hash, KeyEqual>::operator[](K key) const 
+{
+    return  at(key);
+}
+
+template<
+    typename K,
+    typename V,
+    typename Hash,
+    typename KeyEqual
+>
+void Hashmap<K, V, Hash, KeyEqual>::erase(K key) 
+{
+
+    size_t index = std::hash<K>()(key) % _size;
+    if (array[index].contains(key))
+    {
+        array[index].erase(key);
+    }
+
+
+}
+
+
 /**
  * Hashmap destructor
 */
